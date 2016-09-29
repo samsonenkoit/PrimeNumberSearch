@@ -6,3 +6,6 @@ C:\Users\Michael\Documents\Visual Studio 2015\Projects\PrimeNumberServer\PrimeNu
 C:\Users\Michael\Documents\Visual Studio 2015\Projects\PrimeNumberServer\PrimeNumberServer\obj\Debug\PrimeNumberServer.csprojResolveAssemblyReference.cache
 C:\Users\Michael\Documents\Visual Studio 2015\Projects\PrimeNumberServer\PrimeNumberServer\obj\Debug\PrimeNumberServer.exe
 C:\Users\Michael\Documents\Visual Studio 2015\Projects\PrimeNumberServer\PrimeNumberServer\obj\Debug\PrimeNumberServer.pdb
+C:\Users\Michael\Documents\Projects\PrimeNumberSearch\PrimeNumberServer\bin\Debug\PrimeNumberServer.exe.config
+C:\Users\Michael\Documents\Projects\PrimeNumberSearch\PrimeNumberServer\obj\Debug\PrimeNumberServer.exe
+C:\Users\Michael\Documents\Projects\PrimeNumberSearch\PrimeNumberServer\obj\Debug\PrimeNumberServer.pdb

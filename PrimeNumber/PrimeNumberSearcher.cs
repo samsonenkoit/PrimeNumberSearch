@@ -24,7 +24,7 @@ namespace PrimeNumber
 
             while (true)
             {
-                bool isPrime = await _checker.IsPrimeAsync(firstPrime);
+                bool isPrime = await _checker.IsPrimeAsync(firstPrime).ConfigureAwait(false);
 
                 if (isPrime)
                     return firstPrime;
