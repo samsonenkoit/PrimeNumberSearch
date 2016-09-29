@@ -1,0 +1,4 @@
+C:\Users\Michael\Documents\Visual Studio 2015\Projects\PrimeNumberServer\PrimeNumber\bin\Debug\PrimeNumber.dll
+C:\Users\Michael\Documents\Visual Studio 2015\Projects\PrimeNumberServer\PrimeNumber\bin\Debug\PrimeNumber.pdb
+C:\Users\Michael\Documents\Visual Studio 2015\Projects\PrimeNumberServer\PrimeNumber\obj\Debug\PrimeNumber.dll
+C:\Users\Michael\Documents\Visual Studio 2015\Projects\PrimeNumberServer\PrimeNumber\obj\Debug\PrimeNumber.pdb

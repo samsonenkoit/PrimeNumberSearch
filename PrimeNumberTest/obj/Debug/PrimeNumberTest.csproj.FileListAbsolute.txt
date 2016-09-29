@@ -1,0 +1,9 @@
+C:\Users\Michael\Documents\Visual Studio 2015\Projects\PrimeNumberServer\PrimeNumberTest\bin\Debug\PrimeNumberTest.dll
+C:\Users\Michael\Documents\Visual Studio 2015\Projects\PrimeNumberServer\PrimeNumberTest\bin\Debug\PrimeNumberTest.pdb
+C:\Users\Michael\Documents\Visual Studio 2015\Projects\PrimeNumberServer\PrimeNumberTest\bin\Debug\nunit.framework.dll
+C:\Users\Michael\Documents\Visual Studio 2015\Projects\PrimeNumberServer\PrimeNumberTest\bin\Debug\PrimeNumber.dll
+C:\Users\Michael\Documents\Visual Studio 2015\Projects\PrimeNumberServer\PrimeNumberTest\bin\Debug\PrimeNumber.pdb
+C:\Users\Michael\Documents\Visual Studio 2015\Projects\PrimeNumberServer\PrimeNumberTest\bin\Debug\nunit.framework.xml
+C:\Users\Michael\Documents\Visual Studio 2015\Projects\PrimeNumberServer\PrimeNumberTest\obj\Debug\PrimeNumberTest.csprojResolveAssemblyReference.cache
+C:\Users\Michael\Documents\Visual Studio 2015\Projects\PrimeNumberServer\PrimeNumberTest\obj\Debug\PrimeNumberTest.dll
+C:\Users\Michael\Documents\Visual Studio 2015\Projects\PrimeNumberServer\PrimeNumberTest\obj\Debug\PrimeNumberTest.pdb
