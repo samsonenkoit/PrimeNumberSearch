@@ -15,7 +15,7 @@ namespace PrimeNumberServer
         {
             string port = "8080";
 
-            if(args.Count() >= 1)
+            if(args.Any())
                 port = args[0];
 
             string uri = $"http://localhost:{port}/nearestPrime/";
@@ -53,12 +53,12 @@ namespace PrimeNumberServer
                     string param = request.QueryString.Get("number");
                     var startValue = long.Parse(param);
 
-                    var startDt = DateTime.Now;
+                    //var startDt = DateTime.Now;
 
                     PrimeNumberSearcher searcher = new PrimeNumberSearcher(new AdaptivePrimeChecker(4, 100));
                     var prime = searcher.SearchNearestPrimeAsync(startValue).Result;
 
-                    result = $"{prime} / time {(DateTime.Now - startDt).ToString()}";
+                    result = $"{prime}";
                 }
                 catch(Exception e)
                 {
