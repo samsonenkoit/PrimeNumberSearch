@@ -20,17 +20,20 @@ namespace PrimeNumber
 
         public async Task<long> SearchNearestPrimeAsync(long startValue)
         {
-            long firstPrime = startValue + 1;
-
+            if (startValue < 2) return 2;
+            if (startValue == 2) return 3;
+            
+            startValue += (startValue & 0x1) == 0 ? 1 : 2;
+            
             while (true)
             {
-                bool isPrime = await _checker.IsPrimeAsync(firstPrime).ConfigureAwait(false);
+                bool isPrime = await _checker.IsPrimeAsync(startValue).ConfigureAwait(false);
 
                 if (isPrime)
-                    return firstPrime;
+                    return startValue;
                 else
                 {
-                    firstPrime++;
+                    startValue += 2;
                 }
             }
         }

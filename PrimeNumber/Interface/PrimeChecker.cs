@@ -16,6 +16,7 @@ namespace PrimeNumber.Interface
     {
 
         abstract public Task<bool> IsPrimeAsync(long num);
+        //internal abstract Task<bool> UnsafeIsPrimeAsync(long checkedValue, BasePrimeCheckResult baseCheck);
 
         /// <summary>
         /// Осуществляет базовую проверку на простоту.
@@ -29,7 +30,7 @@ namespace PrimeNumber.Interface
         {
             var result = new BasePrimeCheckResult();
 
-            if(number <= 1)
+            if(number < 2)
             {
                 result.IsPrime = false;
             }
@@ -37,7 +38,7 @@ namespace PrimeNumber.Interface
             {
                 result.IsPrime = true;
             }
-            else if(number % 2 == 0)
+            else if((number & 0x1) == 0)
             {
                 result.IsPrime = false;
             }

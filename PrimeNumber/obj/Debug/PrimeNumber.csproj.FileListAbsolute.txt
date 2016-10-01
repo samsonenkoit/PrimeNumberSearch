@@ -4,6 +4,5 @@ C:\Users\Michael\Documents\Visual Studio 2015\Projects\PrimeNumberServer\PrimeNu
 C:\Users\Michael\Documents\Visual Studio 2015\Projects\PrimeNumberServer\PrimeNumber\obj\Debug\PrimeNumber.pdb
 C:\Users\Michael\Documents\Projects\PrimeNumberSearch\PrimeNumber\bin\Debug\PrimeNumber.dll
 C:\Users\Michael\Documents\Projects\PrimeNumberSearch\PrimeNumber\bin\Debug\PrimeNumber.pdb
-C:\Users\Michael\Documents\Projects\PrimeNumberSearch\PrimeNumber\obj\Debug\PrimeNumber.csprojResolveAssemblyReference.cache
 C:\Users\Michael\Documents\Projects\PrimeNumberSearch\PrimeNumber\obj\Debug\PrimeNumber.dll
 C:\Users\Michael\Documents\Projects\PrimeNumberSearch\PrimeNumber\obj\Debug\PrimeNumber.pdb

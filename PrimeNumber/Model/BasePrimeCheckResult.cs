@@ -11,5 +11,7 @@ namespace PrimeNumber.Model
         public bool? IsPrime { get; set; } = false;
         public long MinDivisionMaxValue { get; set; } = -1;
         public long MinDivisionMinValue { get; set; } = -1;
+
+
     }
 }
