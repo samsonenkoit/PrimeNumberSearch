@@ -15,40 +15,46 @@ namespace PrimeNumber
     {
         #region Const
 
-        private const long SynchronousMaxNumberDefault = 10000;
+        private const long SynchronousMaxDivisorsCountDefault = 100;
 
         #endregion
 
         /// <summary>
-        /// Числа которые меньше данного, проверяются синхронно, которые больше, в многопоточном режиме
+        /// Если кол-во делителей, которые необходимо проверить для определения простоты числа меньше, то проверка осуществляется синхнонно,
+        /// если больше, то в несколько потоков
         /// </summary>
-        private readonly long _synchronousMaxNumber;
+        private readonly long _synchronousMaxDivisorsCount;
 
         private readonly MultiThreadPrimeChecker _multiThreadChecker;
 
-        public AdaptivePrimeChecker(int maxThreadsCount, int searchIntervalLength, long synchronousMaxNumber = SynchronousMaxNumberDefault)
+        public AdaptivePrimeChecker(int maxThreadsCount, int searchIntervalLength, long synchronousMaxDivisorsCount = SynchronousMaxDivisorsCountDefault)
         {
-            _synchronousMaxNumber = synchronousMaxNumber;
+            _synchronousMaxDivisorsCount = synchronousMaxDivisorsCount;
             _multiThreadChecker = new MultiThreadPrimeChecker(maxThreadsCount, searchIntervalLength);
         }
 
-        public override Task<bool> IsPrimeAsync(long num)
+        public override async Task<bool> IsPrimeAsync(long num)
         {
             var baseCheck = BasePrimeCheck(num);
 
             if (baseCheck.IsPrime != null)
-                return Task.FromResult(baseCheck.IsPrime.Value);
+                return baseCheck.IsPrime.Value;
 
-            if(num < _synchronousMaxNumber)
+            var haveAdvisor = await HaveOddDivisorAsync(num, baseCheck.MinDivisionMinValue, baseCheck.MinDivisionMaxValue).ConfigureAwait(false);
+            return !haveAdvisor;
+        }
+
+        internal override Task<bool> HaveOddDivisorAsync(long checkedValue, long start, long end)
+        {
+            if(end - start < _synchronousMaxDivisorsCount)
             {
-                return Task.FromResult(!HaveOddDivisor(num, baseCheck.MinDivisionMinValue,
-                    baseCheck.MinDivisionMaxValue, CancellationToken.None));
+                return Task.FromResult(HaveOddDivisor(checkedValue, start,
+                    end, CancellationToken.None));
             }
             else
             {
-                return _multiThreadChecker.IsPrimeAsync(num);
+                return _multiThreadChecker.HaveOddDivisorAsync(checkedValue, start, end);
             }
-
         }
     }
 }

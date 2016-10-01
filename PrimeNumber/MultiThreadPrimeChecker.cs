@@ -31,31 +31,32 @@ namespace PrimeNumber
 
         }
 
-        public override Task<bool> IsPrimeAsync(long num)
+        public override async Task<bool> IsPrimeAsync(long num)
         {
             var baseCheck = BasePrimeCheck(num);
 
             if (baseCheck.IsPrime != null)
-                return Task.FromResult(baseCheck.IsPrime.Value);
+                return baseCheck.IsPrime.Value;
 
-            return UnsafeIsPrimeAsync(num,baseCheck);
+            var haveAdvisor = await HaveOddDivisorAsync(num, baseCheck.MinDivisionMinValue, baseCheck.MinDivisionMaxValue);
+            return !haveAdvisor;
         }
 
-        internal async Task<bool> UnsafeIsPrimeAsync(long checkedValue, BasePrimeCheckResult baseCheck)
+        internal override async Task<bool> HaveOddDivisorAsync(long checkedValue, long start, long end)
         {
             CancellationTokenSource cancellSource = new CancellationTokenSource();
-            PrimeDivisorManager divisorManager = new PrimeDivisorManager(baseCheck.MinDivisionMinValue,
-                baseCheck.MinDivisionMaxValue, _searchIntervalLength);
+            PrimeDivisorManager divisorManager = new PrimeDivisorManager(start,
+                end, _searchIntervalLength);
             var searchTasks = GetSearchTasks(_maxThreadsCount, cancellSource, checkedValue, divisorManager);
 
             while(searchTasks.Count != 0)
             {
                 var task = await Task.WhenAny(searchTasks).ConfigureAwait(false);
 
-                if (!task.Result)
+                if (task.Result)
                 {
                     cancellSource.Cancel();
-                    return false;
+                    return true;
                 }
                 else
                 {
@@ -64,11 +65,11 @@ namespace PrimeNumber
 
             }
 
-            return true;
+            return false;
         }
 
 
-        private Task<bool> GetCheckPrimeTaskAsync(long checkerNumber, PrimeDivisorManager divisorManager, CancellationToken token)
+        private Task<bool> GetHaveAdvisorTaskAsync(long checkerNumber, PrimeDivisorManager divisorManager, CancellationToken token)
         {
             return Task.Factory.StartNew(() =>
             {
@@ -78,10 +79,10 @@ namespace PrimeNumber
 
                     var interval = divisorManager.GetSearchInterval();
 
-                    if (interval == null) return true;
+                    if (interval == null) return false;
 
                     if (HaveOddDivisor(checkerNumber,interval.Item1, interval.Item2, token))
-                        return false;
+                        return true;
 
                 }
             });
@@ -93,7 +94,7 @@ namespace PrimeNumber
             var tasks = new List<Task<bool>>();
 
             for (int i = 0; i < maxTasksCount; i++)
-                tasks.Add(GetCheckPrimeTaskAsync(checkedNumber, divisorManager, cancellationSource.Token));
+                tasks.Add(GetHaveAdvisorTaskAsync(checkedNumber, divisorManager, cancellationSource.Token));
 
             return tasks;
         }

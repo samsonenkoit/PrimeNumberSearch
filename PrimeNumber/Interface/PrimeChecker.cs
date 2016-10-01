@@ -15,8 +15,25 @@ namespace PrimeNumber.Interface
     public abstract class PrimeChecker
     {
 
+        #region Static
+
+        /// <summary>
+        /// Возвращает максимальное значение минимального делителя числа. Используется св-во что 
+        /// число, на которое делится натуральное число n, не превышает целой части квадратного корня из числа n
+        /// </summary>
+        /// <param name="number"></param>
+        /// <returns></returns>
+        internal static long GetMinDivisorMaxValue(long number)
+        {
+            long maxDivisor = (long)Math.Truncate(Math.Sqrt(number));
+            return maxDivisor;
+        }
+
+        #endregion
+
+
         abstract public Task<bool> IsPrimeAsync(long num);
-        //internal abstract Task<bool> UnsafeIsPrimeAsync(long checkedValue, BasePrimeCheckResult baseCheck);
+        abstract internal Task<bool> HaveOddDivisorAsync(long checkedValue, long start, long end);
 
         /// <summary>
         /// Осуществляет базовую проверку на простоту.
@@ -62,17 +79,6 @@ namespace PrimeNumber.Interface
 
         }
 
-        /// <summary>
-        /// Возвращает максимальное значение минимального делителя числа. Используется св-во что 
-        /// число, на которое делится натуральное число n, не превышает целой части квадратного корня из числа n
-        /// </summary>
-        /// <param name="number"></param>
-        /// <returns></returns>
-        protected virtual long GetMinDivisorMaxValue(long number)
-        {
-            long maxDivisor = (long)Math.Truncate(Math.Sqrt(number));
-            return maxDivisor;
-        }
 
         /// <summary>
         /// Проверяет есть ли у числа number нечетный делитель в интервале [start,end]

@@ -17,7 +17,7 @@ namespace PrimeNumberTest
         {
             var primeNumbers = PrimeNumberProvider.GetPrimeNumbers();
 
-            AdaptivePrimeChecker checker = new AdaptivePrimeChecker(4, 100, 1000);
+            AdaptivePrimeChecker checker = new AdaptivePrimeChecker(4, 100, 100);
 
             foreach (var prime in primeNumbers)
             {
@@ -31,7 +31,7 @@ namespace PrimeNumberTest
         {
             var primeNumbers = PrimeNumberProvider.GetNotPrimeNumbers();
 
-            AdaptivePrimeChecker checker = new AdaptivePrimeChecker(4, 100, 1000);
+            AdaptivePrimeChecker checker = new AdaptivePrimeChecker(4, 100, 100);
 
             foreach (var prime in primeNumbers)
             {

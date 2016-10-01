@@ -10,12 +10,12 @@ namespace PrimeNumberTest.Common
     {
         public static long[] GetPrimeNumbers()
         {
-            return new long[] { 2, 3, 5, 7, 11,13, 17, 19, 23, 29, 73, 79, 83, 1861, 2003, 3463 };
+            return new long[] { 2, 3, 5, 7, 11,13, 17, 19, 23, 29, 73, 79, 83, 1861, 2003, 3463, 5000000000129, 1000023423521231521, 1000023423521231513 };
         }
 
         public static long[] GetNotPrimeNumbers()
         {
-            return new long[] { 0, 1, 4, 6, 8, 9, 10, 12, 14, 15, 2000 };
+            return new long[] { 0, 1, 4, 6, 8, 9, 10, 12, 14, 15, 2000, 5000000000122 };
         }
 
         public static Dictionary<long,long> GetValueFirstPrimeDicionary()
@@ -33,6 +33,8 @@ namespace PrimeNumberTest.Common
             d.Add(825, 827);
             d.Add(3100, 3109);
             d.Add(3120, 3121);
+            d.Add(5000000000122, 5000000000129);
+            d.Add(1000023423521231513, 1000023423521231521);
 
             return d;
         }

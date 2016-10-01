@@ -21,13 +21,17 @@ namespace PrimeNumber
         public async Task<long> SearchNearestPrimeAsync(long startValue)
         {
             if (startValue < 2) return 2;
-            if (startValue == 2) return 3;
-            
+            if (startValue < 3) return 3;
+            if (startValue < 5) return 5;
+            if (startValue < 7) return 7;
+
             startValue += (startValue & 0x1) == 0 ? 1 : 2;
-            
+
             while (true)
             {
-                bool isPrime = await _checker.IsPrimeAsync(startValue).ConfigureAwait(false);
+                var minDivisorMaxValue = PrimeChecker.GetMinDivisorMaxValue(startValue);
+
+                bool isPrime = !(await _checker.HaveOddDivisorAsync(startValue, 3, minDivisorMaxValue).ConfigureAwait(false));
 
                 if (isPrime)
                     return startValue;
