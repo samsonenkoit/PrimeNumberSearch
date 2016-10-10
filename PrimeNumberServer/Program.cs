@@ -5,6 +5,7 @@ using System.IO;
 using System.Linq;
 using System.Net;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 
 namespace PrimeNumberServer
@@ -56,7 +57,7 @@ namespace PrimeNumberServer
                     //var startDt = DateTime.Now;
 
                     PrimeNumberSearcher searcher = new PrimeNumberSearcher(new AdaptivePrimeChecker(4, 100));
-                    var prime = searcher.SearchNearestPrimeAsync(startValue).Result;
+                    var prime = searcher.SearchNearestPrimeAsync(startValue, CancellationToken.None).Result;
 
                     result = $"{prime}";
                 }

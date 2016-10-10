@@ -32,8 +32,8 @@ namespace PrimeNumber.Interface
         #endregion
 
 
-        abstract public Task<bool> IsPrimeAsync(long num);
-        abstract internal Task<bool> HaveOddDivisorAsync(long checkedValue, long start, long end);
+        abstract public Task<bool> IsPrimeAsync(long num, CancellationToken token);
+        abstract internal Task<bool> HaveOddDivisorAsync(long checkedValue, long start, long end, CancellationToken token);
 
         /// <summary>
         /// Осуществляет базовую проверку на простоту.

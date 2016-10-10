@@ -31,18 +31,18 @@ namespace PrimeNumber
 
         }
 
-        public override async Task<bool> IsPrimeAsync(long num)
+        public override async Task<bool> IsPrimeAsync(long num, CancellationToken token)
         {
             var baseCheck = BasePrimeCheck(num);
 
             if (baseCheck.IsPrime != null)
                 return baseCheck.IsPrime.Value;
 
-            var haveAdvisor = await HaveOddDivisorAsync(num, baseCheck.MinDivisionMinValue, baseCheck.MinDivisionMaxValue);
+            var haveAdvisor = await HaveOddDivisorAsync(num, baseCheck.MinDivisionMinValue, baseCheck.MinDivisionMaxValue, token);
             return !haveAdvisor;
         }
 
-        internal override async Task<bool> HaveOddDivisorAsync(long checkedValue, long start, long end)
+        internal override async Task<bool> HaveOddDivisorAsync(long checkedValue, long start, long end, CancellationToken token)
         {
             CancellationTokenSource cancellSource = new CancellationTokenSource();
             PrimeDivisorManager divisorManager = new PrimeDivisorManager(start,
@@ -51,6 +51,8 @@ namespace PrimeNumber
 
             while(searchTasks.Count != 0)
             {
+                token.ThrowIfCancellationRequested();
+
                 var task = await Task.WhenAny(searchTasks).ConfigureAwait(false);
 
                 if (task.Result)

@@ -3,6 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 
 namespace PrimeNumber
@@ -18,7 +19,7 @@ namespace PrimeNumber
             _checker = checker;
         }
 
-        public async Task<long> SearchNearestPrimeAsync(long startValue)
+        public async Task<long> SearchNearestPrimeAsync(long startValue, CancellationToken token)
         {
             if (startValue < 2) return 2;
             if (startValue < 3) return 3;
@@ -31,7 +32,7 @@ namespace PrimeNumber
             {
                 var minDivisorMaxValue = PrimeChecker.GetMinDivisorMaxValue(startValue);
 
-                bool isPrime = !(await _checker.HaveOddDivisorAsync(startValue, 3, minDivisorMaxValue).ConfigureAwait(false));
+                bool isPrime = !(await _checker.HaveOddDivisorAsync(startValue, 3, minDivisorMaxValue, token).ConfigureAwait(false));
 
                 if (isPrime)
                     return startValue;

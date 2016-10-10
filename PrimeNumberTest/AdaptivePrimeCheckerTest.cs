@@ -5,6 +5,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 
 namespace PrimeNumberTest
@@ -21,7 +22,7 @@ namespace PrimeNumberTest
 
             foreach (var prime in primeNumbers)
             {
-                Assert.AreEqual(checker.IsPrimeAsync(prime).Result, true);
+                Assert.AreEqual(checker.IsPrimeAsync(prime, CancellationToken.None).Result, true);
             }
 
         }
@@ -35,7 +36,7 @@ namespace PrimeNumberTest
 
             foreach (var prime in primeNumbers)
             {
-                Assert.AreEqual(checker.IsPrimeAsync(prime).Result, false);
+                Assert.AreEqual(checker.IsPrimeAsync(prime, CancellationToken.None).Result, false);
             }
 
         }

@@ -27,24 +27,26 @@ namespace PrimeNumber
 
         private readonly MultiThreadPrimeChecker _multiThreadChecker;
 
-        public AdaptivePrimeChecker(int maxThreadsCount, int searchIntervalLength, long synchronousMaxDivisorsCount = SynchronousMaxDivisorsCountDefault)
+        public AdaptivePrimeChecker(int maxThreadsCount, int searchIntervalLength,
+            long synchronousMaxDivisorsCount = SynchronousMaxDivisorsCountDefault)
         {
             _synchronousMaxDivisorsCount = synchronousMaxDivisorsCount;
             _multiThreadChecker = new MultiThreadPrimeChecker(maxThreadsCount, searchIntervalLength);
         }
 
-        public override async Task<bool> IsPrimeAsync(long num)
+        public override async Task<bool> IsPrimeAsync(long num, CancellationToken token)
         {
             var baseCheck = BasePrimeCheck(num);
 
             if (baseCheck.IsPrime != null)
                 return baseCheck.IsPrime.Value;
 
-            var haveAdvisor = await HaveOddDivisorAsync(num, baseCheck.MinDivisionMinValue, baseCheck.MinDivisionMaxValue).ConfigureAwait(false);
+            var haveAdvisor = await HaveOddDivisorAsync(num, baseCheck.MinDivisionMinValue,
+                baseCheck.MinDivisionMaxValue, token).ConfigureAwait(false);
             return !haveAdvisor;
         }
 
-        internal override Task<bool> HaveOddDivisorAsync(long checkedValue, long start, long end)
+        internal override Task<bool> HaveOddDivisorAsync(long checkedValue, long start, long end, CancellationToken token)
         {
             if(end - start < _synchronousMaxDivisorsCount)
             {
@@ -53,7 +55,7 @@ namespace PrimeNumber
             }
             else
             {
-                return _multiThreadChecker.HaveOddDivisorAsync(checkedValue, start, end);
+                return _multiThreadChecker.HaveOddDivisorAsync(checkedValue, start, end, token);
             }
         }
     }
