@@ -51,7 +51,7 @@ namespace PrimeNumber
             if(end - start < _synchronousMaxDivisorsCount)
             {
                 return Task.FromResult(HaveOddDivisor(checkedValue, start,
-                    end, CancellationToken.None));
+                    end, token));
             }
             else
             {
